@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Archer Files</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-slate-900 to-gray-800 text-white">
+  <div class="text-center space-y-6 p-10 rounded-3xl shadow-2xl bg-white/5 backdrop-blur-xl">
+    <h1 class="text-5xl font-bold tracking-wide">THE ARCHER FILES</h1>
+    <p class="text-lg text-gray-300">Something is coming.</p>
+
+    <div class="flex justify-center gap-6 text-center mt-6" id="countdown">
+      <div>
+        <div class="text-4xl font-mono" id="days">00</div>
+        <div class="uppercase text-xs tracking-widest">Days</div>
+      </div>
+      <div>
+        <div class="text-4xl font-mono" id="hours">00</div>
+        <div class="uppercase text-xs tracking-widest">Hours</div>
+      </div>
+      <div>
+        <div class="text-4xl font-mono" id="minutes">00</div>
+        <div class="uppercase text-xs tracking-widest">Minutes</div>
+      </div>
+      <div>
+        <div class="text-4xl font-mono" id="seconds">00</div>
+        <div class="uppercase text-xs tracking-widest">Seconds</div>
+      </div>
+    </div>
+        <div class="uppercase text-xs tracking-widest">Hours</div>
+      </div>
+      <div>
+        <div class="text-4xl font-mono" id="minutes">00</div>
+        <div class="uppercase text-xs tracking-widest">Minutes</div>
+      </div>
+      <div>
+        <div class="text-4xl font-mono" id="seconds">00</div>
+        <div class="uppercase text-xs tracking-widest">Seconds</div>
+      </div>
+    </div>
+
+    <p class="text-sm text-gray-400">Global launch: Feb 8, 2026 — 2:00 PM UTC</p>
+  </div>
+
+  <script>
+    // Universal target moment: Feb 8, 2026 at 14:00 UTC
+    const targetDate = new Date(Date.UTC(2026, 1, 8, 14, 0, 0));
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML =
+          '<div class="text-3xl font-bold">THE FILES ARE OPEN.</div>';
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      daysEl.textContent = String(days).padStart(2, "0");
+      hoursEl.textContent = String(hours).padStart(2, "0");
+      minutesEl.textContent = String(minutes).padStart(2, "0");
+      secondsEl.textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
